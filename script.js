@@ -1,40 +1,7 @@
-let playerSelection;
-
-let container = document.querySelector("#button-container");
-container.addEventListener("click", function(event) {
-  if (event.target.tagName === "BUTTON") {
-    const action = event.target.dataset.action;
-    switch (action) {
-      case "rock":
-        playerSelection = rock;
-        break;
-          case "rock":
-            playerSelection = rock;
-            break;
-        
-
-    }
-
-    }
-  }
-})
-
-
-
-
-
-
-
-
-// function getPlayerChoice() {
-//   let playerChoice = prompt("Choose your weapon!", "Rock, Paper or Scissors?");  
-//   if (playerChoice.toLowerCase() !== "rock" && playerChoice.toLowerCase() !== "paper" && playerChoice.toLowerCase() !== "scissors") {
-//     alert ("Incorrect! Try again!");
-//     return getPlayerChoice()
-//   } else {
-//     return playerChoice.toLowerCase()
-//   }
-// }
+let result = document.querySelector("#result");
+let results = document.querySelector("#results");
+let playerWin = 0;
+let compWin = 0;
 
 function getComputerChoice() {
   let choice = ["rock", "paper", "scissors"];
@@ -44,36 +11,25 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    return "Draw! Try again!";
-  } else if (playerSelection === "rock" && computerSelection === "paper") {
-    return "You Lose! Paper beats Rock!";
-  } else if (playerSelection === "rock" && computerSelection === "scissors") {
-    return "You Win! Rock beats Scissors!";
-  } else if (playerSelection === "paper" && computerSelection === "rock") {
-    return "You Win! Paper beats Rock!";
-  } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    return "You Lose! Scissors beats Paper!"; 
-  } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    return "You Lose! Rock beats Scissors!";
-  } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    return "You Win! Scissors beats Paper!";
-  }
+    result.textContent = "Draw! Try again!";
+  } else if ((playerSelection === "rock" && computerSelection === "paper") ||
+  (playerSelection === "paper" && computerSelection === "scissors") ||
+  (playerSelection === "scissors" && computerSelection === "rock")) {
+result.textContent = `You Lose! ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}!`;
+compWin++
+} else {
+result.textContent = `You Win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}!`;
+playerWin++
+}
+results.textContent = `Player won ${playerWin} times, and Computer won ${compWin}`
 }
 
-function playGame() {
-  let playerWin = 0;
-  let compWin = 0;
-  for (let i = 0; i < 5; i++) {
-    const playerSelection = getPlayerChoice();
-    const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection);
-    if (result.includes("Win")) {
-      playerWin++;
-      } else if (result.includes("Lose")) {
-      compWin++;
+let container = document.querySelector("#button-container");
+container.addEventListener("click", function(event) {
+  if (event.target.tagName === "BUTTON") {
+    playerSelection = event.target.dataset.action;
+    let computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
     }
   }
-  return `You wins ${playerWin} times, computer wins ${compWin}`;
-}
-
-console.log(playGame());
+)
