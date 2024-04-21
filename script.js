@@ -1,12 +1,40 @@
-function getPlayerChoice() {
-  let playerChoice = prompt("Choose your weapon!", "Rock, Paper or Scissors?");  
-  if (playerChoice.toLowerCase() !== "rock" && playerChoice.toLowerCase() !== "paper" && playerChoice.toLowerCase() !== "scissors") {
-    alert ("Incorrect! Try again!");
-    return getPlayerChoice()
-  } else {
-    return playerChoice.toLowerCase()
+let playerSelection;
+
+let container = document.querySelector("#button-container");
+container.addEventListener("click", function(event) {
+  if (event.target.tagName === "BUTTON") {
+    const action = event.target.dataset.action;
+    switch (action) {
+      case "rock":
+        playerSelection = rock;
+        break;
+          case "rock":
+            playerSelection = rock;
+            break;
+        
+
+    }
+
+    }
   }
-}
+})
+
+
+
+
+
+
+
+
+// function getPlayerChoice() {
+//   let playerChoice = prompt("Choose your weapon!", "Rock, Paper or Scissors?");  
+//   if (playerChoice.toLowerCase() !== "rock" && playerChoice.toLowerCase() !== "paper" && playerChoice.toLowerCase() !== "scissors") {
+//     alert ("Incorrect! Try again!");
+//     return getPlayerChoice()
+//   } else {
+//     return playerChoice.toLowerCase()
+//   }
+// }
 
 function getComputerChoice() {
   let choice = ["rock", "paper", "scissors"];
